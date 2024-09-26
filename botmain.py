@@ -8,7 +8,6 @@ from bot.handlers import commands
 from bot import config
 
 
-
 async def main():
 
     bot = Bot(config.BOT_TOKEN)
