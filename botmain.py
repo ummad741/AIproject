@@ -7,6 +7,7 @@ from aiogram import Bot, Dispatcher
 from bot.handlers import commands
 from bot import config
 
+# example
 
 async def main():
 
