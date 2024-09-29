@@ -1,0 +1,45 @@
+version: '3'
+
+services:
+
+  database:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: aidb
+      POSTGRES_USER: aidb
+      POSTGRES_PASSWORD: aidb 
+    ports:
+      - 15432:5432 
+
+  app:
+    build: .
+    command: sh -c "python manage.py runserver 0.0.0.0:8000"
+    environment:
+      PYTHONPATH: /aiproject
+    volumes:
+      - ./src:/aiproject
+    ports:
+      - 8001:8000
+    depends_on:
+      - database
+
+  api:
+    build: .
+    environment:
+      PYTHONPATH: /aiproject
+    volumes:
+      - ./src:/aiproject
+    ports:
+      - 9999:9000
+    depends_on:
+      - database
+
+  bot:
+    build: .
+    command: bash -c "python3 botmain.py"
+    environment:
+      PYTHONPATH: /aiproject
+    volumes:
+      - ./src:/aiproject
+    depends_on:
+      - database
