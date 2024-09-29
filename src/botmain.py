@@ -10,7 +10,6 @@ from bot import config
 # example
 
 async def main():
-
     bot = Bot(config.BOT_TOKEN)
     dp = Dispatcher()
     dp.include_routers(
